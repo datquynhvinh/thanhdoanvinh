@@ -15,3 +15,8 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'izfaqdfz_webdoan');
 define('DB_CHARSET', 'utf8');
+
+define('LOAI_VAN_BAN', [
+    'thanhdoan' => 1,
+    'coso' => 2,
+]);

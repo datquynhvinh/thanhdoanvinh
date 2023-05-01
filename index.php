@@ -3,17 +3,34 @@
     session_start();
     include_once('db/connect.php');
 
+     /** Lấy danh sách tin nổi bật */
     $tinNoiBatSql = 'SELECT news.id, news.image, news.title, categories.cate_name 
         FROM news
         LEFT JOIN categories ON news.category_id = categories.id
         ORDER BY news.id DESC 
         limit 4';
-    $tinNoiBatQuery = mysqli_query($con, $tinNoiBatSql);
+    $tinNoiBatResult = mysqli_query($con, $tinNoiBatSql);
     $tinNoiBats = [];
-    while ($result = $tinNoiBatQuery->fetch_assoc() ) {
+    while ($result = $tinNoiBatResult->fetch_assoc() ) {
         $tinNoiBats[$result['id']] = $result;
     }
     $tinNoiBatMoiNhat = array_shift($tinNoiBats);
+
+    /** Lấy danh sách văn bản thành đoàn */
+    $vanBanThanhDoanSQL = 'SELECT * 
+    FROM vanban
+    WHERE loai = ' . LOAI_VAN_BAN['thanhdoan'] . '
+    ORDER BY vanban.id DESC 
+    limit 4';
+    $vanBanThanhDoanResult = mysqli_query($con, $vanBanThanhDoanSQL);
+
+    /** Lấy danh sách văn bản cơ sở */
+    $vanBanCoSoSQL = 'SELECT * 
+    FROM vanban
+    WHERE loai = ' . LOAI_VAN_BAN['coso'] . '
+    ORDER BY vanban.id DESC 
+    limit 4';
+    $vanBanCoSoResult = mysqli_query($con, $vanBanCoSoSQL);
 
 ?>
 
@@ -612,38 +629,16 @@
                                         <th>Ngày cập nhật</th>
                                         <th>Trích yếu</th>
                                     </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
+                                    <?php while ($result = $vanBanThanhDoanResult->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td><?php echo $result['kyhieu']; ?></td>
+                                            <td><?php echo $result['ngaycapnhat']; ?></td>
+                                            <td>
+                                                <p><?php echo $result['trichyeu']; ?></p>
+                                                <a href="" title="" class="btn btn_download"></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </table>
                             </div>
                             <div id="menu1" class="tab-pane fade">
@@ -653,39 +648,16 @@
                                         <th>Ngày cập nhật</th>
                                         <th>Trích yếu</th>
                                     </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>247-TB/TĐTN-BTC</td>
-                                        <td>25-09-2020</td>
-                                        <td>
-                                            <p>Thông báo kết quả xét tuyển viên chức Cơ sở cai nghiện ma túy Gia Minh năm 2020</p>
-                                            <a href="" title="" class="btn btn_download"></a>
-                                        </td>
-                                    </tr>
-                                    
+                                    <?php while ($result = $vanBanCoSoResult->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td><?php echo $result['kyhieu']; ?></td>
+                                            <td><?php echo $result['ngaycapnhat']; ?></td>
+                                            <td>
+                                                <p><?php echo $result['trichyeu']; ?></p>
+                                                <a href="" title="" class="btn btn_download"></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>                                  
                                 </table>
                             </div>
                         </div>
