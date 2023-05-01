@@ -1,9 +1,22 @@
 <?php
     require_once 'app/config/config.php';
+    session_start();
+    include_once('db/connect.php');
 
-	session_start();
-	include_once('db/connect.php');
- ?>
+    $tinNoiBatSql = 'SELECT news.id, news.image, news.title, categories.cate_name 
+        FROM news
+        LEFT JOIN categories ON news.category_id = categories.id
+        ORDER BY news.id DESC 
+        limit 4';
+    $tinNoiBatQuery = mysqli_query($con, $tinNoiBatSql);
+    $tinNoiBats = [];
+    while ($result = $tinNoiBatQuery->fetch_assoc() ) {
+        $tinNoiBats[$result['id']] = $result;
+    }
+    $tinNoiBatMoiNhat = array_shift($tinNoiBats);
+
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -16,13 +29,13 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
     </script>
     <link rel="stylesheet" type="text/css" href="./assets/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
@@ -40,47 +53,34 @@
 
 </head>
 <body>
-	<?php
-	    include('include/menu.php');
-	?>
+    <?php
+        include('include/menu.php');
+    ?>
 <div class="section_hot_news wow fadeInUp" data-wow-delay="200ms">
     <div class="container">
         <div class="row">
             <div class="element_hot_news">
                 <div class="item">
                     <div class="box_item">
-                        <a href="" title=""><img src="./assets/img/news1.png" alt=""></a>
+                        <a href="" title=""><img src="<?php echo !empty($tinNoiBatMoiNhat['image']) ? URLROOT . $tinNoiBatMoiNhat['image'] : '' ?>" alt=""></a>
                         <div class="content">
-                            <h2><a href="" title="">Lễ trao tặng huân chương lao động hạng nhất cung văn hóa thiếu nhi thành phố</a></h2>
-                            <p><a href="" title="">Tin chính trị - xã hội</a></p>
+                            <h2><a href="" title=""><?php echo !empty($tinNoiBatMoiNhat['title']) ? $tinNoiBatMoiNhat['title'] : '' ?></a></h2>
+                            <p><a href="" title=""><?php echo !empty($tinNoiBatMoiNhat['cate_name']) ? $tinNoiBatMoiNhat['cate_name'] : '' ?></a></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="item">
-                    <div class="box_item">
-                        <a href="" title=""><img src="./assets/img/news2.png" alt=""></a>
-                        <div class="content">
-                            <h2><a href="" title="">Lễ trao tặng huân chương lao động hạng nhất cung văn hóa thiếu nhi thành phố</a></h2>
-                            <p><a href="" title="">Tin chính trị - xã hội</a></p>
+                    <?php  ?>
+                    <?php foreach($tinNoiBats as $tinNoiBat) { ?>
+                        <div class="box_item">
+                            <a href="" title=""><img src="<?php echo !empty($tinNoiBat['image']) ? URLROOT . $tinNoiBat['image'] : '' ?>" alt=""></a>
+                            <div class="content">
+                                <h2><a href="" title=""><?php echo !empty($tinNoiBat['image']) ?  $tinNoiBat['title'] : '' ?></a></h2>
+                                <p><a href="" title=""><?php echo !empty($tinNoiBat['image']) ? $tinNoiBat['cate_name'] : '' ?></a></p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="box_item">
-                        <a href="" title=""><img src="./assets/img/news3.png" alt=""></a>
-                        <div class="content">
-                            <h2><a href="" title="">Lễ trao tặng huân chương lao động hạng nhất cung văn hóa thiếu nhi thành phố</a></h2>
-                            <p><a href="" title="">Tin chính trị - xã hội</a></p>
-                        </div>
-                    </div>
-
-                    <div class="box_item">
-                        <a href="" title=""><img src="./assets/img/newa4.png" alt=""></a>
-                        <div class="content">
-                            <h2><a href="" title="">Lễ trao tặng huân chương lao động hạng nhất cung văn hóa thiếu nhi thành phố</a></h2>
-                            <p><a href="" title="">Tin chính trị - xã hội</a></p>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

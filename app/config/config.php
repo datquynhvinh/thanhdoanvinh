@@ -3,7 +3,7 @@
 //App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 //URL Root
-define('URLROOT', 'http://localhost/thanhdoanvinh1');
+define('URLROOT', 'http://localhost/thanhdoanvinh');
 //Site Name
 define('SITENAME', 'Đoàn Thanh Niên Thành Phố Vinh');
 //App Version

@@ -1,13 +1,9 @@
 <?php 
-		$sql_category = mysqli_query($con,'SELECT * FROM menu ORDER BY idMenu DESC');
-        $sql_category_top = mysqli_query($con,'SELECT * FROM `menu-top` ORDER BY idMenuTop ASC');
-	?>
+    require_once 'app/config/config.php';
+    $sql_category = mysqli_query($con,'SELECT * FROM menu ORDER BY idMenu DESC');
+    $sql_category_top = mysqli_query($con,'SELECT * FROM `menu-top` ORDER BY idMenuTop ASC');
+?>
 
-<style>
-	
-
-	
-</style>
 <div class="section_header">
     <div class="header_pc">
         <div class="header_page">
@@ -41,7 +37,7 @@
             <div class="container">
                 <div class="row">
                     <div class="element_bar_menu">
-                        <a href="https://congnghephanmem.online/" title="">
+                        <a href="<?php echo URLROOT ?>" title="">
                             <img src="./assets/img/logo.png" alt="">
                         </a>
                         <div class="icon_bar">
@@ -66,82 +62,17 @@
                             <li><a href="" title=""><img src="./assets/img/icon4.png" alt=""></a></li>
                             <li><a href="" title=""><img src="./assets/img/icon5.png" alt=""></a></li>
                         </ul>
-                       
-                            <li><a href="https://congnghephanmem.online/" title=""><img src="./assets/img/home.png" alt=""></a></li>
-                            <?php 
-                                $sql_category_danhmuc = mysqli_query($con,'SELECT * FROM menu ORDER BY idMenu ASC');
-                                while($row_category_danhmuc = mysqli_fetch_array($sql_category_danhmuc)){ ?>
-                                <li class="hightline">
-                                    <a href="<?php echo $row_category_danhmuc['slug']; ?>.php">
-                                        <?php echo $row_category_danhmuc['title']; ?>
-                                    </a>
-                                </li>
-                                <?php } 
-                            ?>
-                         <!--    <div class="mega_menu">
-                                <ul class="submenu">
-                                    <li><a href="" title="">Lịch công tác</a></li>
-                                    <li><a href="" title="">Văn bản Đoàn - Hội - Đội</a></li>
-                                    <li><a href="" title="">Học lý luận, chính trị</a></li>
-                                    <li><a href="" title="">Mỗi tuần 1 câu chuyện</a></li>
-                                    <li><a href="" title="">Theo dấu chân Bác</a></li>
-                                    <li><a href="" title="">Hướng dẫn, khen thưởng</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="hightline">
-                            <a href="" title="">Văn bản Đoàn - Hội - Đội</a>
-                            <div class="mega_menu">
-                                <ul class="submenu">
-                                    <li><a href="" title="">Lịch công tác</a></li>
-                                    <li><a href="" title="">Văn bản Đoàn - Hội - Đội</a></li>
-                                    <li><a href="" title="">Học lý luận, chính trị</a></li>
-                                    <li><a href="" title="">Mỗi tuần 1 câu chuyện</a></li>
-                                    <li><a href="" title="">Theo dấu chân Bác</a></li>
-                                    <li><a href="" title="">Hướng dẫn, khen thưởng</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="hightline">
-                            <a href="" title="">Học lý luận, chính trị</a>
-                            <div class="mega_menu">
-                                <ul class="submenu">
-                                    <li><a href="" title="">Lịch công tác</a></li>
-                                    <li><a href="" title="">Văn bản Đoàn - Hội - Đội</a></li>
-                                    <li><a href="" title="">Học lý luận, chính trị</a></li>
-                                    <li><a href="" title="">Mỗi tuần 1 câu chuyện</a></li>
-                                    <li><a href="" title="">Theo dấu chân Bác</a></li>
-                                    <li><a href="" title="">Hướng dẫn, khen thưởng</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="hightline">
-                            <a href="" title="">Mỗi tuần 1 câu chuyện</a>
-                            <div class="mega_menu">
-                                <ul class="submenu">
-                                    <li><a href="" title="">Lịch công tác</a></li>
-                                    <li><a href="" title="">Văn bản Đoàn - Hội - Đội</a></li>
-                                    <li><a href="" title="">Học lý luận, chính trị</a></li>
-                                    <li><a href="" title="">Mỗi tuần 1 câu chuyện</a></li>
-                                    <li><a href="" title="">Theo dấu chân Bác</a></li>
-                                    <li><a href="" title="">Hướng dẫn, khen thưởng</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="hightline">
-                            <a href="" title="">Theo dấu chân Bác</a>
-                            <div class="mega_menu">
-                                <ul class="submenu">
-                                    <li><a href="" title="">Lịch công tác</a></li>
-                                    <li><a href="" title="">Văn bản Đoàn - Hội - Đội</a></li>
-                                    <li><a href="" title="">Học lý luận, chính trị</a></li>
-                                    <li><a href="" title="">Mỗi tuần 1 câu chuyện</a></li>
-                                    <li><a href="" title="">Theo dấu chân Bác</a></li>
-                                    <li><a href="" title="">Hướng dẫn, khen thưởng</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="" title="">Hướng dẫn, khen thưởng</a></li> -->
+                        <li><a href="<?php echo URLROOT ?>" title=""><img src="./assets/img/home.png" alt=""></a></li>
+                        <?php 
+                            $sql_category_danhmuc = mysqli_query($con,'SELECT * FROM menu ORDER BY idMenu ASC');
+                            while($row_category_danhmuc = mysqli_fetch_array($sql_category_danhmuc)){ ?>
+                            <li class="hightline">
+                                <a href="<?php echo $row_category_danhmuc['slug']; ?>.php">
+                                    <?php echo $row_category_danhmuc['title']; ?>
+                                </a>
+                            </li>
+                            <?php } 
+                        ?>
                         <li>
                             <a href="" title=""><img src="./assets/img/search.png" alt=""></a>
                             <div class="mega_menu search_header">
