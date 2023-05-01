@@ -1,6 +1,6 @@
-<?php 
+<?php
+	require_once '../../app/config/config.php';
     include_once('../include/top.php');
-   
 ?>
 <?php
     if(isset($_POST['delete'])) {
@@ -70,7 +70,7 @@
                                                 <td class="admin_new_title"><?php echo $row['title'] ?></td>
                                                 <td class="admin_new_content"><?php echo $row['content'] ?></td>
                                                 <td>
-                                                    <img class="admin_table_img" src="<?php echo $row['image'] ?>" /></td>
+                                                    <img class="admin_table_img" src="<?php echo URLROOT . '/assets/img/tintuc/' . $row['image'] ?>" /></td>
                                                 <td>
                                                     <a class="admin_icon_detail" href=""><i class="fas fa-eye"></i></a>
                                                     <a class="admin_icon_edit" href="edit.php?id=<?php echo $row['id'] ?>"><i class="fas fa-pen"></i></a>

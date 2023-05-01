@@ -20,3 +20,9 @@ define('LOAI_VAN_BAN', [
     'thanhdoan' => 1,
     'coso' => 2,
 ]);
+
+define("DS", "/");
+define("TEMP_DIR", "");
+define("BASE_DIR", $_SERVER['DOCUMENT_ROOT']);
+define("ROOT_DIR", BASE_DIR . DS . TEMP_DIR);
+define("TIN_TUC_UPLOAD_DIR", '/assets/img/tintuc/');
